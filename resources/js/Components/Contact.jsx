@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
+import { useForm } from '@inertiajs/react';
 
-const Contact = () => {
-  const [formData, setFormData] = useState({
+function Contact() {
+  const { data, setData, post, processing, errors } = useForm({
     name: '',
     email: '',
     organization: '',
@@ -10,28 +11,10 @@ const Contact = () => {
     message: ''
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!formData.name || !formData.email || !formData.message) {
-      alert('Mohon lengkapi semua field yang wajib diisi.');
-      return;
-    }
-
-    alert('Terima kasih atas pesan Anda. Tim kami akan segera menghubungi Anda.');
-
-    setFormData({
-      name: '',
-      email: '',
-      organization: '',
-      subject: '',
-      message: ''
-    });
+    post(route('message.send'));
   };
 
   return (
@@ -98,26 +81,26 @@ const Contact = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap *</label>
-                    <input type="text" name="name" value={formData.name} onChange={handleInputChange} required className="input input-bordered w-full" placeholder="Masukkan nama lengkap" />
+                    <input type="text" name="name" value={data.name} onChange={(e) => setData('name', e.target.value)} required className="input input-bordered w-full" placeholder="Masukkan nama lengkap" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-                    <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="input input-bordered w-full" placeholder="nama@email.com" />
+                    <input type="email" name="email" value={data.email} onChange={(e) => setData('email', e.target.value)} required className="input input-bordered w-full" placeholder="nama@email.com" />
                   </div>
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Organisasi</label>
-                    <input type="text" name="organization" value={formData.organization} onChange={handleInputChange} className="input input-bordered w-full" placeholder="Nama organisasi/instansi" />
+                    <input type="text" name="organization" value={data.organization} onChange={(e) => setData('organization', e.target.value)} className="input input-bordered w-full" placeholder="Nama organisasi/instansi" />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Subjek</label>
-                    <input type="text" name="subject" value={formData.subject} onChange={handleInputChange} className="input input-bordered w-full" placeholder="Subjek pesan" />
+                    <input type="text" name="subject" value={data.subject} onChange={(e) => setData('subject', e.target.value)} className="input input-bordered w-full" placeholder="Subjek pesan" />
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Pesan *</label>
-                  <textarea name="message" value={formData.message} onChange={handleInputChange} required className="textarea textarea-bordered w-full" rows={6} placeholder="Tuliskan pesan Anda di sini..." />
+                  <textarea name="message" value={data.message} onChange={(e) => setData('message', e.target.value)} required className="textarea textarea-bordered w-full" rows={6} placeholder="Tuliskan pesan Anda di sini..." />
                 </div>
                 <button type="submit" className="btn btn-primary w-full">
                   Kirim Pesan
@@ -130,19 +113,9 @@ const Contact = () => {
 
         {/* Map */}
         <div className="mt-16">
-          <div className="bg-gradient-to-br from-primary to-accent p-10 rounded-xl text-center">
-            <MapPin size={48} className="text-primary mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Lokasi Kantor CPSI</h3>
-            <p className="text-gray-600">Jl. Sudirman No. 123, Jakarta Pusat 10220</p>
-            <a
-              href="https://maps.google.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary mt-4"
-            >
-              Lihat di Google Maps
-            </a>
-          </div>
+          <iframe className='rounded-xl text-center w-full' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2996083016747!2d106.8056774!3d-6.2241694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f14e1e509b95%3A0xd5ad687eede84a66!2sJl.%20Jenderal%20Sudirman%20No.123%2C%20RT.1%2FRW.3%2C%20Gelora%2C%20Kecamatan%20Tanah%20Abang%2C%20Kota%20Jakarta%20Pusat%2C%20Daerah%20Khusus%20Ibukota%20Jakarta%2010270!5e0!3m2!1sen!2sid!4v1752665682768!5m2!1sen!2sid" width="400" height="400" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade">
+
+          </iframe>
         </div>
       </div>
     </section>

@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kerjasamas', function (Blueprint $table) {
+        Schema::create('kerjasama', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('logo');
+            $table->enum('status', ['0', '1'])->default('1');
             $table->timestamps();
         });
     }

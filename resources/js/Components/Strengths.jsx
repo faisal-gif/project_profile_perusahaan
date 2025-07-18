@@ -1,7 +1,7 @@
 import React from 'react';
 import { Award, Users, Globe, Lightbulb, Target, Zap } from 'lucide-react';
 
-const Strengths = () => {
+const Strengths = ({kerjasama}) => {
   const strengths = [
     {
       icon: Award,
@@ -103,20 +103,15 @@ const Strengths = () => {
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
-            {[
-              { code: 'GOVT', label: 'Kementerian' },
-              { code: 'PEMDA', label: 'Pemerintah Daerah' },
-              { code: 'UNIV', label: 'Universitas' },
-              { code: 'INTL', label: 'Organisasi Internasional' },
-            ].map((item, idx) => (
+            {kerjasama.map((item, idx) => (
               <div
                 key={idx}
-                className="text-center opacity-60 hover:opacity-100 transition-opacity duration-300"
+                className="text-center hover:opacity-100 transition-opacity duration-300"
               >
-                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                  <span className="text-sm font-bold text-gray-600">{item.code}</span>
+                <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-2">
+                 <img src={`/storage/${item.logo}`} alt={item.name} className="w-[50px]" />
                 </div>
-                <span className="text-xs text-gray-500">{item.label}</span>
+                <span className="text-xs text-gray-500">{item.name}</span>
               </div>
             ))}
           </div>

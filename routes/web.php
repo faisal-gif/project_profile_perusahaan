@@ -5,6 +5,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KerjasamaController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,6 +17,7 @@ Route::get('/news/{id}', [HomeController::class, 'newsDetail'])->name('newsDetai
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/services', [HomeController::class, 'services'])->name('services');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('/send', [HomeController::class, 'sendMessage'])->name('message.send');
 
 
 Route::get('/dashboard', function () {
@@ -29,6 +31,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('category', CategoryController::class);
         Route::resource('news', NewsController::class);
         Route::resource('kerjasama', KerjasamaController::class);
+        Route::resource('message', MessageController::class);
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

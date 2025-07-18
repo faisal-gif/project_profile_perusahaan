@@ -86,7 +86,7 @@ function AllNews({ news, categorys }) {
                                                         className="flex justify-between items-center p-2 rounded hover:bg-base-200"
                                                     >
                                                         <span className="text-sm text-gray-700">{category.name}</span>
-                                                        <span className="badge badge-secondary text-xs">{category.count_news}</span>
+                                                        <span className="badge badge-soft text-xs">{category.count_news}</span>
                                                     </Link>
                                                 );
                                             })}

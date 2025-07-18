@@ -24,7 +24,7 @@ export default function AuthenticatedLayout({ header, children }) {
                         </button>
                     </div>
                     <div className="flex-1">
-                        <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
+                        <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost lg:hidden">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -67,13 +67,13 @@ export default function AuthenticatedLayout({ header, children }) {
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 ">
-                    <li>
+                    <li>  
                         <Link href="/">
-                            <ApplicationLogo className="h-10 w-auto mx-auto mb-10" />
+                            <ApplicationLogo className="h-10 w-auto mx-auto" />
                         </Link>
                     </li>
                     {/* Sidebar content here */}
-                    <li className='mb-3'>
+                    <li className='mb-3 pt-10'>
                         <h2 className="menu-title">News</h2>
                         <ul>
                             <li><Link href={route('news.index')}>News List</Link></li>
@@ -82,17 +82,16 @@ export default function AuthenticatedLayout({ header, children }) {
                     </li>
 
                     <li className='mb-3'>
-                        <h2 className="menu-title">Websiet</h2>
+                        <h2 className="menu-title">Website</h2>
                         <ul>
-                            <li><Link href={route('news.index')}>Kerjasama</Link></li>
-                            <li><Link href={route('news.index')}>Hero Galery</Link></li>
+                            <li><Link href={route('kerjasama.index')}>Kerjasama</Link></li>
                         </ul>
                     </li>
 
                     <li className='mb-3'>
                         <h2 className="menu-title">Pesan</h2>
                         <ul>
-                            <li><Link href={route('news.index')}>List Pesan</Link></li>
+                            <li><Link href={route('message.index')}>List Pesan</Link></li>
                         </ul>
                     </li>
 

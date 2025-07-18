@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class MessageController extends Controller
 {
@@ -12,7 +13,9 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Message/Index', [
+            'message' => Message::orderBy('created_at', 'desc')->get(),
+        ]);
     }
 
     /**
@@ -36,7 +39,12 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        //
+        $message->is_read = true;
+        $message->save();
+
+        return Inertia::render('Message/Show', [
+            'pesan' => $message,
+        ]);
     }
 
     /**

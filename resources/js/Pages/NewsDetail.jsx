@@ -1,19 +1,14 @@
 import React from 'react';
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { Calendar, ArrowLeft, Briefcase, Users, Award, Globe, Building, Trophy, Share2, BookmarkPlus, Calendar1, Newspaper } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
 
 
-const NewsDetail = ({ news, latestNews }) => {
-
-
+const NewsDetail = ({ news, latestNews,categorys }) => {
 
   const article = news || '';
-
-  console.log(article);
-
 
   const getCategoryColor = (category) => {
     switch (category) {
@@ -30,6 +25,8 @@ const NewsDetail = ({ news, latestNews }) => {
 
   if (!article) {
     return (
+      <>
+       <Head title="Artikel Tidak Ditemukan" />
       <div className="min-h-screen bg-base-100">
         <Navigation />
         <main className="pt-20">
@@ -44,10 +41,13 @@ const NewsDetail = ({ news, latestNews }) => {
         </main>
         <Footer />
       </div>
+      </>
     );
   }
 
   return (
+    <>
+    <Head title={article.title} />
     <div className="min-h-screen bg-base-100">
       <Navigation />
       <main className="pt-20">
@@ -70,8 +70,7 @@ const NewsDetail = ({ news, latestNews }) => {
                   <p className="text-xl text-base-content/70 mb-8 leading-relaxed">{article.description}</p>
                   <div className="flex flex-wrap gap-3 mb-8">
                     <button className="btn btn-outline btn-sm"><Share2 className="h-4 w-4 mr-2" />Bagikan</button>
-                    <button className="btn btn-outline btn-sm"><BookmarkPlus className="h-4 w-4 mr-2" />Simpan</button>
-                  </div>
+                   </div>
                 </div>
                 <div className="mb-8">
                   <img src={`/storage/${article.image}`} alt={article.title} className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg" />
@@ -82,9 +81,42 @@ const NewsDetail = ({ news, latestNews }) => {
                     <div>
                       <p className="text-sm font-medium text-base-content mb-2">Bagikan artikel ini:</p>
                       <div className="flex gap-2">
-                        {['Facebook', 'Twitter', 'LinkedIn', 'WhatsApp'].map(platform => (
-                          <button key={platform} className="btn btn-outline btn-sm">{platform}</button>
-                        ))}
+                         {/* Share via WhatsApp */}
+                            <a
+                              href={`https://wa.me/?text=${encodeURIComponent(article.title + ' ' + window.location.href)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn btn-outline btn-sm"
+                            >
+                              WhatsApp
+                            </a>
+                            {/* Share via Facebook */}
+                            <a
+                              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn btn-outline btn-sm"
+                            >
+                              Facebook
+                            </a>
+                            {/* Share via X (Twitter) */}
+                            <a
+                              href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(article.title)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn btn-outline btn-sm"
+                            >
+                              X
+                            </a>
+                            {/* Share via LinkedIn */}
+                            <a
+                              href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(article.title)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn btn-outline btn-sm"
+                            >
+                              LinkedIn
+                            </a>
                       </div>
                     </div>
                     <div className="text-sm text-base-content/70">
@@ -94,17 +126,25 @@ const NewsDetail = ({ news, latestNews }) => {
                 </div>
               </div>
               <div className="lg:col-span-1 space-y-6">
-                <div className="bg-base-100 border border-base-300 rounded-lg p-6">
-                  <h3 className="text-lg font-semibold text-base-content mb-4">Kategori</h3>
+
+                <div className="bg-base-100 border rounded-lg p-6">
+                  <h3 className="text-lg font-semibold mb-4">Kategori</h3>
                   <div className="space-y-2">
-                    {['Semua', 'Karir', 'Event', 'Penghargaan'].map(category => (
-                      <Link key={category} to={`/news${category !== 'Semua' ? `?category=${category}` : ''}`} className="flex items-center justify-between p-3 rounded-md hover:bg-base-200">
-                        <span className="text-base-content/70 hover:text-base-content">{category}</span>
-                        <span className="badge badge-soft text-xs">{category === 'Karir' ? '2' : category === 'Event' ? '3' : category === 'Penghargaan' ? '1' : '0'}</span>
-                      </Link>
-                    ))}
+                    {categorys.map((category) => {
+                      return (
+                        <Link
+                          key={category.id}
+                          href={category.name !== 'Semua' ? `/allNews?category_id=${category.id}` : `/allNews`}
+                          className="flex justify-between items-center p-2 rounded hover:bg-base-200"
+                        >
+                          <span className="text-sm text-gray-700">{category.name}</span>
+                          <span className="badge badge-soft text-xs">{category.count_news}</span>
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
+
                 <div className="bg-base-100 border rounded-lg p-6">
                   <h3 className="text-lg font-semibold mb-4">Berita Terbaru</h3>
                   <div className="space-y-4">
@@ -131,6 +171,7 @@ const NewsDetail = ({ news, latestNews }) => {
       </main>
       <Footer />
     </div>
+    </>
   );
 };
 

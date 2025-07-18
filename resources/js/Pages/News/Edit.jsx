@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Head, useForm } from '@inertiajs/react'
+import { Head, router, useForm } from '@inertiajs/react'
 import Select from 'react-select'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
@@ -10,30 +10,30 @@ export default function Edit({ news, categories }) {
         news.image ? `/storage/${news.image}` : '/placeholder.svg'
     )
 
-    const [tagInput, setTagInput] = useState('')
-    const [tags, setTags] = useState(news.tags || [])
-
-    const { data, setData, put, processing, errors } = useForm({
-        thumbnail: '',
+    const { data: editData, setData: setEditData, processing, errors } = useForm({
+        thumbnail: null,
         title: news.title,
         category_id: news.category_id,
         description: news.description,
         content: news.content,
-       
+
     })
 
-    
+
     const handleThumbnailChange = (e) => {
         const file = e.target.files[0]
         if (file) {
-            setData('thumbnail', file)
+            setEditData('thumbnail', file)
             setThumbnailPreview(URL.createObjectURL(file))
         }
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        put(route('news.update', news.id))
+        router.post(route('news.update', news.id), {
+            _method: "PUT",
+            ...editData,
+        })
     }
 
     return (
@@ -66,7 +66,7 @@ export default function Edit({ news, categories }) {
                             {/* Title */}
                             <div className='col-span-2'>
                                 <label className="label">Title</label>
-                                <input type="text" value={data.title} onChange={(e) => setData('title', e.target.value)}
+                                <input type="text" value={editData.title} onChange={(e) => setEditData('title', e.target.value)}
                                     className="input input-bordered w-full" />
                                 {errors.title && <div className="text-red-500 text-sm">{errors.title}</div>}
                             </div>
@@ -76,20 +76,20 @@ export default function Edit({ news, categories }) {
                                 <label className="label">Category</label>
                                 <Select
                                     options={categories.map(cat => ({ value: cat.id, label: cat.name }))}
-                                    onChange={(selected) => setData('category_id', selected?.value)}
-                                    defaultValue={categories.map(cat => ({ value: cat.id, label: cat.name })).find(c => c.value === news.category_id)}
+                                    onChange={(selected) => setEditData('category_id', selected?.value)}
+                                    defaultValue={categories.map(cat => ({ value: cat.id, label: cat.name })).find(c => c.value === editData.category_id)}
                                 />
                                 {errors.category_id && <div className="text-red-500 text-sm">{errors.category_id}</div>}
                             </div>
 
                         </div>
-                       
+
 
                         {/* Description */}
                         <div>
                             <label className="label">Deskripsi</label>
-                            <textarea value={data.description}
-                                onChange={(e) => setData('description', e.target.value)}
+                            <textarea value={editData.description}
+                                onChange={(e) => setEditData('description', e.target.value)}
                                 className="textarea textarea-bordered w-full" />
                             {errors.description && <div className="text-red-500 text-sm">{errors.description}</div>}
                         </div>
@@ -97,11 +97,11 @@ export default function Edit({ news, categories }) {
                         {/* Content */}
                         <div>
                             <label className="label">Content</label>
-                            <ReactQuill value={data.content} onChange={(value) => setData('content', value)} />
+                            <ReactQuill value={editData.content} onChange={(value) => setEditData('content', value)} />
                             {errors.content && <div className="text-red-500 text-sm">{errors.content}</div>}
                         </div>
 
-                      
+
                         {/* Submit */}
                         <button type="submit" disabled={processing} className="btn btn-primary w-full">
                             {processing ? 'Updating...' : 'Update Berita'}
