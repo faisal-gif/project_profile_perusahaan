@@ -67,7 +67,7 @@ export default function AuthenticatedLayout({ header, children }) {
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 ">
-                    <li>  
+                    <li>
                         <Link href="/">
                             <ApplicationLogo className="h-10 w-auto mx-auto" />
                         </Link>
@@ -84,8 +84,13 @@ export default function AuthenticatedLayout({ header, children }) {
                     <li className='mb-3'>
                         <h2 className="menu-title">Website</h2>
                         <ul>
+                            <li><Link href={route('hero.index')}>Hero</Link></li>
+                            <li><Link href={route('visi_misi.index')}>Visi & Misi</Link></li>
+                            <li><Link href={route('tim.index')}>Tim</Link></li>
+                            <li><Link href={route('layanan.index')}>Layanan</Link></li>
                             <li><Link href={route('kerjasama.index')}>Kerjasama</Link></li>
                         </ul>
+
                     </li>
 
                     <li className='mb-3'>

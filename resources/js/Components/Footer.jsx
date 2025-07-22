@@ -1,5 +1,7 @@
 import React from 'react'
 import { Phone, Mail, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react';
+import ApplicationLogo from './ApplicationLogo';
+import ApplicationLightLogo from './ApplicationLightLogo';
 
 
 function Footer() {
@@ -11,10 +13,8 @@ function Footer() {
                     {/* Company Info */}
                     <div className="md:col-span-2">
                         <div className="flex items-center space-x-2 mb-4">
-                            <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                                <span className="text-white font-bold text-sm">C</span>
-                            </div>
-                            <span className="font-bold text-xl">CPSI</span>
+
+                           <ApplicationLightLogo />
                         </div>
                         <p className="text-gray-300 mb-6 max-w-md">
                             Center for Public Sector Innovation - Think tank dan lembaga riset kebijakan publik yang berkomitmen menciptakan inovasi berkelanjutan dalam tata kelola pemerintahan.

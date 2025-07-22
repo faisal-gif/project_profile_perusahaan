@@ -5,33 +5,7 @@ import { ArrowLeft, MapPin, Phone, Mail, Clock, Send, MessageSquare, Calendar, U
 import GuestLayout from '@/Layouts/GuestLayout';
 
 
-const Contact = () => {
-    const contactInfo = [
-        {
-            icon: MapPin,
-            title: "Alamat Kantor",
-            content: "Jl. Sudirman No. 123, Jakarta Pusat 10250",
-            subContent: "Menara CPSI, Lantai 15-17"
-        },
-        {
-            icon: Phone,
-            title: "Telepon",
-            content: "+62 21 5555 1234",
-            subContent: "Senin - Jumat, 09:00 - 17:00 WIB"
-        },
-        {
-            icon: Mail,
-            title: "Email",
-            content: "info@cpsi.id",
-            subContent: "Respon dalam 24 jam"
-        },
-        {
-            icon: Clock,
-            title: "Jam Operasional",
-            content: "Senin - Jumat: 09:00 - 17:00 WIB",
-            subContent: "Sabtu: 09:00 - 13:00 WIB"
-        }
-    ];
+const Contact = ({ kontak }) => {
 
     return (
         <>
@@ -39,7 +13,7 @@ const Contact = () => {
             <GuestLayout>
                 <section className="py-16  bg-base-200">
                     <div className="container mx-auto px-6">
-                       
+
                         <div className="text-center mt-20">
                             <h1 className="text-4xl font-bold mb-4">Hubungi Kami</h1>
                             <p className="text-xl max-w-3xl mx-auto">
@@ -52,16 +26,40 @@ const Contact = () => {
                 <section className="py-16 lg:px-16">
                     <div className="container mx-auto px-6">
                         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {contactInfo.map((info, index) => (
-                                <div key={index} className="bg-base-100 rounded-lg shadow-md text-center p-6 hover:shadow-xl transition">
-                                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
-                                        <info.icon className="h-6 w-6 text-primary" />
-                                    </div>
-                                    <h3 className="text-lg font-bold mb-1">{info.title}</h3>
-                                    <p className="text-base-content mb-1">{info.content}</p>
-                                    <p className="text-sm text-base-content/60">{info.subContent}</p>
+
+                            <div key='1' className="bg-base-100 rounded-lg shadow-md text-center p-6 hover:shadow-xl transition">
+                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <MapPin className="h-6 w-6 text-primary" />
                                 </div>
-                            ))}
+                                <h3 className="text-lg font-bold mb-1">Alamat Kantor</h3>
+                                <p className="text-gray-600 whitespace-pre-line">{kontak.address}</p>
+                            </div>
+
+                            <div key='2' className="bg-base-100 rounded-lg shadow-md text-center p-6 hover:shadow-xl transition">
+                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <Phone className="h-6 w-6 text-primary" />
+                                </div>
+                                <h3 className="text-lg font-bold mb-1">Telepon</h3>
+                                <p className="text-gray-600 whitespace-pre-line">{kontak.phone}</p>
+                            </div>
+
+                            <div key='3' className="bg-base-100 rounded-lg shadow-md text-center p-6 hover:shadow-xl transition">
+                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <Mail className="h-6 w-6 text-primary" />
+                                </div>
+                                <h3 className="text-lg font-bold mb-1">Email</h3>
+                                <p className="text-gray-600 whitespace-pre-line">{kontak.email}</p>
+                            </div>
+
+                            <div key='4' className="bg-base-100 rounded-lg shadow-md text-center p-6 hover:shadow-xl transition">
+                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <Mail className="h-6 w-6 text-primary" />
+                                </div>
+                                <h3 className="text-lg font-bold mb-1">Jam Oprasional</h3>
+                                 <p className="text-gray-600 whitespace-pre-line">{kontak.jam_oprasional}</p>
+                            </div>
+
+
                         </div>
                     </div>
                 </section>

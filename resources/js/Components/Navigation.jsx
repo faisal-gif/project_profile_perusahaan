@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react';
 import { Link } from '@inertiajs/react';
 import ApplicationLogo from './ApplicationLogo';
 
+
 function Navigation() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -14,12 +15,12 @@ function Navigation() {
         }
     };
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+        <nav className=" top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
             <div className="container mx-auto px-6">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <div className="flex items-center space-x-2">
-                       <ApplicationLogo />
+                        <ApplicationLogo />
                     </div>
 
                     {/* Desktop Menu */}
@@ -57,13 +58,14 @@ function Navigation() {
                     </div>
 
                     {/* CTA Button */}
-                    <div className="hidden md:block">
+                    <div className=" hidden md:flex flex-row items-center gap-2">
                         <button
                             onClick={() => scrollToSection('contact')}
                             className="btn btn-primary"
                         >
                             Hubungi Kami
                         </button>
+                      
                     </div>
 
                     {/* Mobile Menu Button */}

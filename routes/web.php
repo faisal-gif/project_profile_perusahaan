@@ -3,9 +3,14 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HeroController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KerjasamaController;
+use App\Http\Controllers\KontakLokasiController;
+use App\Http\Controllers\LayananController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\TimController;
+use App\Http\Controllers\VisiMisiController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,6 +37,11 @@ Route::middleware('auth')->group(function () {
         Route::resource('news', NewsController::class);
         Route::resource('kerjasama', KerjasamaController::class);
         Route::resource('message', MessageController::class);
+        Route::resource('hero', HeroController::class);
+        Route::resource('visi_misi', VisiMisiController::class);
+        Route::resource('tim', TimController::class);
+        Route::resource('layanan', LayananController::class);
+        Route::resource('kontak_lokasi', KontakLokasiController::class);
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

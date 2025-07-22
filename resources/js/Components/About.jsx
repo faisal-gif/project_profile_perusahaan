@@ -1,7 +1,7 @@
 import React from 'react';
 import { Target, Eye, Award } from 'lucide-react';
 
-const About = () => {
+const About = ({visimisi}) => {
   return (
     <section id="about" className="py-20 lg:px-20 bg-white">
       <div className="container mx-auto px-6">
@@ -24,9 +24,7 @@ const About = () => {
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">Visi</h3>
               </div>
-              <p className="text-gray-600 leading-relaxed">
-                Menjadi pusat unggulan inovasi sektor publik yang menghasilkan solusi berbasis riset untuk transformasi tata kelola pemerintahan yang berkelanjutan, inklusif, dan berorientasi pada kepentingan masyarakat.
-              </p>
+               <div className="text-gray-600 leading-relaxed text-center prose prose-lg max-w-none prose-li:marker:text-cyan-800/40" dangerouslySetInnerHTML={{ __html: visimisi.visi }}  />
             </div>
           </div>
 
@@ -39,24 +37,8 @@ const About = () => {
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900">Misi</h3>
               </div>
-              <ul className="text-gray-600 space-y-3">
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  Menghasilkan riset kebijakan publik yang berkualitas tinggi
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  Membangun kapasitas sumber daya manusia sektor publik
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  Mendorong adopsi teknologi digital dalam pemerintahan
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-accent rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                  Mempromosikan tata kelola yang berkelanjutan dan inklusif
-                </li>
-              </ul>
+               <div className="text-gray-600 leading-relaxed prose prose-lg max-w-none prose-li:marker:text-cyan-800/40" dangerouslySetInnerHTML={{ __html: visimisi.misi }}  />
+            
             </div>
           </div>
         </div>

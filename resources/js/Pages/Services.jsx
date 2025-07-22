@@ -2,79 +2,12 @@
 
 import React from 'react';
 import { Head, Link } from '@inertiajs/react';
-import { ArrowLeft, Search, Users, BookOpen, Lightbulb, BarChart3, Cog, Globe, CheckCircle, ArrowRight } from 'lucide-react';
+import * as Icons from 'lucide-react';
 import GuestLayout from '@/Layouts/GuestLayout';
 
 
-const Services = () => {
-    const mainServices = [
-        {
-            icon: Search,
-            title: "Riset & Analisis Kebijakan",
-            description: "Melakukan riset mendalam dan analisis komprehensif terhadap kebijakan publik dengan metodologi yang ketat dan berbasis evidence.",
-            features: [
-                "Policy impact assessment",
-                "Comparative policy analysis",
-                "Stakeholder mapping",
-                "Feasibility studies"
-            ]
-        },
-        {
-            icon: Lightbulb,
-            title: "Konsultasi Strategis",
-            description: "Memberikan konsultasi strategis kepada pemerintah dan organisasi publik dalam pengembangan kebijakan dan program inovatif.",
-            features: [
-                "Strategic planning",
-                "Program design & development",
-                "Change management",
-                "Innovation workshops"
-            ]
-        },
-        {
-            icon: Users,
-            title: "Pengembangan Kapasitas",
-            description: "Program pelatihan dan pengembangan kapasitas untuk aparatur sipil negara dan stakeholder sektor publik lainnya.",
-            features: [
-                "Leadership development",
-                "Technical training",
-                "Policy analysis bootcamp",
-                "Digital transformation training"
-            ]
-        },
-        {
-            icon: BarChart3,
-            title: "Monitoring & Evaluasi",
-            description: "Layanan monitoring dan evaluasi program publik dengan framework yang komprehensif dan indikator yang terukur.",
-            features: [
-                "Program evaluation",
-                "Performance monitoring",
-                "Impact assessment",
-                "Data analytics"
-            ]
-        },
-        {
-            icon: Cog,
-            title: "Digital Government Advisory",
-            description: "Konsultasi khusus dalam transformasi digital pemerintahan, dari strategi hingga implementasi teknologi.",
-            features: [
-                "Digital strategy development",
-                "System integration planning",
-                "User experience design",
-                "Technology assessment"
-            ]
-        },
-        {
-            icon: BookOpen,
-            title: "Publikasi & Diseminasi",
-            description: "Menghasilkan publikasi berkualitas tinggi dan menyelenggarakan forum diskusi untuk berbagi knowledge dan best practices.",
-            features: [
-                "Policy briefs",
-                "Research reports",
-                "Seminars & workshops",
-                "Knowledge sharing sessions"
-            ]
-        }
-    ];
+const Services = ({ services }) => {
+    
 
     const specialPrograms = [
         {
@@ -160,21 +93,14 @@ const Services = () => {
                         <p className="text-gray-600">Rangkaian lengkap layanan untuk mendukung inovasi sektor publik.</p>
                     </div>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {mainServices.map((service, index) => (
+                        {services.map((service, index) => (
                             <div key={index} className="bg-base-100 rounded-xl shadow-md p-6 hover:shadow-lg transition">
-                                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                                    <service.icon className="h-6 w-6 text-primary" />
+                                <div className="w-12 h-12 bg-blue-600/10 rounded-full flex items-center justify-center mb-4 text-primary">
+                                    {Icons[service.icon] ? React.createElement(Icons[service.icon], { size: 23 }) : null}
                                 </div>
-                                <h3 className="font-bold text-lg mb-2">{service.title}</h3>
-                                <p className="text-sm text-gray-600 mb-4">{service.description}</p>
-                                <ul className="space-y-2">
-                                    {service.features.map((feature, idx) => (
-                                        <li key={idx} className="flex items-start gap-2 text-sm text-gray-600">
-                                            <CheckCircle className="h-4 w-4 text-primary mt-1" />
-                                            {feature}
-                                        </li>
-                                    ))}
-                                </ul>
+                                <h3 className="font-bold text-lg mb-2">{service.name}</h3>
+                                <div className=" prose prose-sm max-w-none prose-li:marker:text-cyan-800/40" dangerouslySetInnerHTML={{ __html: service.description }} />
+
                             </div>
                         ))}
                     </div>
@@ -195,7 +121,7 @@ const Services = () => {
                                 <ul className="mt-4 space-y-1 text-sm">
                                     {program.benefits.map((benefit, idx) => (
                                         <li key={idx} className="flex gap-2 items-center">
-                                            <CheckCircle className="w-4 h-4 text-primary" /> {benefit}
+                                            <Icons.CheckCircle className="w-4 h-4 text-primary" /> {benefit}
                                         </li>
                                     ))}
                                 </ul>

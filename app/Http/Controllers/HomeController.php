@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Hero;
 use App\Models\Kerjasama;
+use App\Models\KontakLokasi;
+use App\Models\Layanan;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\News;
+use App\Models\Tim;
+use App\Models\VisiMisi;
 
 class HomeController extends Controller
 {
@@ -15,6 +20,15 @@ class HomeController extends Controller
 
     public function index()
     {
+
+        $hero = Hero::first();
+
+        $visiMisi = VisiMisi::first();
+
+        $layanan = Layanan::select('id', 'name', 'description', 'icon', 'status')
+            ->where('status', '1')
+            ->get();
+
         $news = News::with('category:id,name')
             ->orderBy('created_at', 'desc')
             ->limit(3)
@@ -22,7 +36,10 @@ class HomeController extends Controller
 
         $kerjasama = Kerjasama::select('id', 'name', 'logo', 'status')->where('status', '1')->get();
 
-        return Inertia::render('Welcome', ['news' => $news, 'kerjasama' => $kerjasama]);
+        $kontak = KontakLokasi::first();
+
+
+        return Inertia::render('Welcome', ['news' => $news, 'kerjasama' => $kerjasama, 'layanan' => $layanan, 'visiMisi' => $visiMisi, 'kontak' => $kontak, 'heroData' => $hero]);
     }
 
     public function allNews(Request $request)
@@ -99,23 +116,33 @@ class HomeController extends Controller
         }
 
         $news->author = $news->user->name;
-    
+
         return Inertia::render('NewsDetail', ['news' => $news, 'latestNews' => $latestNews, 'categorys' => $category]);
     }
 
     public function about()
     {
-        return Inertia::render('About');
+        $visiMisi = VisiMisi::first();
+        $team = Tim::all();
+
+        return Inertia::render('About', [
+            'visiMisi' => $visiMisi,
+            'team' => $team,
+        ]);
     }
 
     public function contact()
     {
-        return Inertia::render('Contact');
+        return Inertia::render('Contact', [
+            'kontak' => KontakLokasi::first(),
+        ]);
     }
 
     public function services()
     {
-        return Inertia::render('Services');
+        return Inertia::render('Services', [
+            'services' => Layanan::all(),
+        ]);
     }
 
     public function sendMessage(Request $request)

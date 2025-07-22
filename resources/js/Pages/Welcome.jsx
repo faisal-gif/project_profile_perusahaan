@@ -7,18 +7,18 @@ import Strengths from '@/Components/Strengths';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link } from '@inertiajs/react';
 
-export default function Welcome({news,kerjasama}) {
+export default function Welcome({ news, kerjasama, layanan, visiMisi, kontak, heroData }) {
 
     return (
         <>
             <Head title="Welcome" />
             <GuestLayout>
-                <Hero />
-                <About />
-                <Services />
+                <Hero hero={heroData} />
+                <About visimisi={visiMisi} />
+                <Services services={layanan} />
                 <Strengths kerjasama={kerjasama} />
                 <News newsItems={news} />
-                <Contact />
+                <Contact kontakLokasi={kontak} />
 
             </GuestLayout>
 

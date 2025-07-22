@@ -74,9 +74,6 @@ const Strengths = ({kerjasama}) => {
                   <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
                     <Icon className="h-10 w-10 text-white" />
                   </div>
-                  <div className="absolute -top-2 -right-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded-full">
-                    {strength.stat}
-                  </div>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors duration-300">
                   {strength.title}

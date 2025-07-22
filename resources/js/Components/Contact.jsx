@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
 import { useForm } from '@inertiajs/react';
 
-function Contact() {
+function Contact({ kontakLokasi }) {
   const { data, setData, post, processing, errors } = useForm({
     name: '',
     email: '',
@@ -32,43 +32,50 @@ function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="space-y-6">
             {/* Contact Info Items */}
-            {[{
-              icon: Phone,
-              title: 'Telepon',
-              detail: '+62 21 1234 5678',
-              bg: 'bg-primary/10',
-              iconColor: 'text-primary'
-            }, {
-              icon: Mail,
-              title: 'Email',
-              detail: 'info@cpsi.org.id',
-              bg: 'bg-accent/10',
-              iconColor: 'text-accent'
-            }, {
-              icon: MapPin,
-              title: 'Alamat',
-              detail: 'Jl. Sudirman No. 123, Jakarta Pusat 10220, Indonesia',
-              bg: 'bg-primary/10',
-              iconColor: 'text-primary'
-            }, {
-              icon: Clock,
-              title: 'Jam Operasional',
-              detail: 'Senin - Jumat: 08:00 - 17:00\nSabtu: 08:00 - 12:00',
-              bg: 'bg-accent/10',
-              iconColor: 'text-accent'
-            }].map((item, idx) => (
-              <div key={idx} className="border-2 p-6 rounded-lg hover:shadow transition-all">
-                <div className="flex items-start">
-                  <div className={`w-12 h-12 ${item.bg} rounded-lg flex items-center justify-center mr-4`}>
-                    <item.icon className={`h-6 w-6 ${item.iconColor}`} />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">{item.title}</h3>
-                    <p className="text-gray-600 whitespace-pre-line">{item.detail}</p>
-                  </div>
+            <div key='1' className="border-2 p-6 rounded-lg hover:shadow transition-all">
+              <div className="flex items-start">
+                <div className='w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4'>
+                  <Phone className='h-6 w-6 text-accent' />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Telepon</h3>
+                  <p className="text-gray-600 whitespace-pre-line">{kontakLokasi.phone}</p>
                 </div>
               </div>
-            ))}
+            </div>
+            <div key='2' className="border-2 p-6 rounded-lg hover:shadow transition-all">
+              <div className="flex items-start">
+                <div className='w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mr-4'>
+                  <Mail className='h-6 w-6 text-accent' />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Email</h3>
+                  <p className="text-gray-600 whitespace-pre-line">{kontakLokasi.email}</p>
+                </div>
+              </div>
+            </div>
+            <div key='3' className="border-2 p-6 rounded-lg hover:shadow transition-all">
+              <div className="flex items-start">
+                <div className='w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4'>
+                  <MapPin className='h-6 w-6 text-primary' />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Alamat</h3>
+                  <p className="text-gray-600 whitespace-pre-line">{kontakLokasi.address}</p>
+                </div>
+              </div>
+            </div>
+            <div key='4' className="border-2 p-6 rounded-lg hover:shadow transition-all">
+              <div className="flex items-start">
+                <div className='w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mr-4'>
+                  <Clock className='h-6 w-6 text-accent' />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">Jam Opreasinal</h3>
+                  <p className="text-gray-600 whitespace-pre-line">{kontakLokasi.jam_oprasional}</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Form */}
